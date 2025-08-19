@@ -119,7 +119,7 @@ def render_schedule(groups, launcher_name="Launcher", pad_colors=None):
     return img
 
 st.title("SMSO Schedule Builder")
-launcher = st.text_input("Launcher name", value="")
+launcher = st.text_input("Launcher name")
 file = st.file_uploader("Upload the schedule Excel (.xlsx)", type=["xlsx"])
 
 if file:
