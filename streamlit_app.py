@@ -8,14 +8,12 @@ import streamlit as st
 st.set_page_config(page_title="Schedule Builder", layout="wide")
 
 def find_header_row(df):
-    # find row containing 'Associate Name'
     hits = df.apply(lambda r: r.astype(str).str.contains("Associate Name", na=False)).any(axis=1)
     idxs = list(df.index[hits])
     return idxs[0] if idxs else None
 
 def load_rostered_sheet(xlsx_bytes):
     xls = pd.ExcelFile(io.BytesIO(xlsx_bytes))
-    # choose Rostered Work Blocks sheet heuristically
     target = None
     for name in xls.sheet_names:
         if "Rostered" in name or "Work Blocks" in name:
@@ -126,7 +124,6 @@ file = st.file_uploader("Upload the schedule Excel (.xlsx)", type=["xlsx"])
 
 if file:
     df_use, days = load_rostered_sheet(file.read())
-    # Build selectbox options as the day part (Sun, Mon...) from headers
     day_keys = [d.split(",")[0] for d in days]
     day = st.selectbox("Select day of week", options=day_keys, index=0)
     groups = parse_day(df_use, day)
@@ -135,7 +132,6 @@ if file:
     else:
         img = render_schedule(groups, launcher)
         st.image(img, caption=f"Schedule for {day}")
-        # Offer download
         buf = io.BytesIO()
         img.save(buf, format="PNG")
         st.download_button("Download PNG", buf.getvalue(), file_name=f"schedule_{day}.png", mime="image/png")
