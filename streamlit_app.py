@@ -120,7 +120,7 @@ def render_schedule(groups, launcher_name="Launcher", pad_colors=None):
             idx += 1
     return img
 
-st.title("📋 Schedule Builder")
+st.title("SMSO Schedule Builder")
 launcher = st.text_input("Launcher name", value="Jamal")
 file = st.file_uploader("Upload the schedule Excel (.xlsx)", type=["xlsx"])
 
@@ -140,4 +140,4 @@ if file:
         img.save(buf, format="PNG")
         st.download_button("Download PNG", buf.getvalue(), file_name=f"schedule_{day}.png", mime="image/png")
 else:
-    st.info("Upload an Excel file from the 'Rostered Work Blocks' export to begin.")
+    st.info("Upload Excel file to get schedule!")
