@@ -71,7 +71,7 @@ def render_schedule(groups, launcher_name="Launcher", pad_colors=None):
     if pad_colors is None:
         pad_colors = {1:(74,120,206), 2:(226,40,216), 3:(73,230,54)}
     left_pad_w = 220
-    idx_col_w = 40
+    idx_col_w = 50
     name_col_w = 700
     header_h = 120
     row_h = 48
